@@ -1,6 +1,6 @@
 ## Looking to Listen at the Cocktail Party: A Speaker-Independent Audio-Visual Model for Speech Separation
 ------------
-##### The project is an audiovisual model reproduced by the contents of the paper Looking to Listen at the Cocktail Party: A Speaker-Independent Audio-Visual Model for Speech Separation.
+#### The project is an audiovisual model reproduced by the contents of the paper Looking to Listen at the Cocktail Party: A Speaker-Independent Audio-Visual Model for Speech Separation.
 > Ephrat A, Mosseri I, Lang O, et al. Looking to listen at the cocktail party: A speaker-independent audio-visual model for speech separation[J]. arXiv preprint arXiv:1804.03619, 2018.
 
 ![](https://img.shields.io/github/issues/JusperLee/Looking-to-Listen-at-the-Cocktail-Party.svg) ![](https://img.shields.io/github/forks/JusperLee/Looking-to-Listen-at-the-Cocktail-Party.svg) ![](https://img.shields.io/github/stars/JusperLee/Looking-to-Listen-at-the-Cocktail-Party.svg) ![](https://img.shields.io/github/license/JusperLee/Looking-to-Listen-at-the-Cocktail-Party.svg)
@@ -20,11 +20,11 @@
 ### Pretreatment
 #### Video Data
 1. First use this command to download the YouTube video and use ffmpeg to capture the 3 second video as 75 images.
-   ```shell
+```shell
 python3 video_download.py
 ```
 2. Then use mtcnn to get the image bounding box of the face, and then use the CSV x, y to locate the face center point.
-    ```shell
+```shell
 pip install mtcnn
 python3 face_detected.py
 python3 check_vaild_face.py
@@ -73,10 +73,10 @@ beta_loss = gamma_loss * 2
 
 
 ### Plan to achieve
-- [] **Implemented with Pytorch**
-- [] **Provide a trained model**
-- [] **Optimize code style**
-- [] **......**
+- [ ] **Implemented with Pytorch**
+- [ ] **Provide a trained model**
+- [ ] **Optimize code style**
+- [ ] **......**
 
 ------------
 
