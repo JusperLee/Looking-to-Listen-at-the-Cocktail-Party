@@ -58,7 +58,7 @@ python3 face_emb.py
 - **Support continuous training after interrupt training**
 - **Support multi-GPU multi-process training.**
 - **According to the description in the paper, set the following parameters:**
-   ```python
+```python
 people_num = 2 # How many people you want to separate?
 epochs = 100
 initial_epoch = 0
@@ -73,12 +73,13 @@ beta_loss = gamma_loss * 2
 
 
 ### Plan to achieve
-[] **Implemented with Pytorch**
-[] **Provide a trained model**
-[] **Optimize code style**
-[] **......**
+- [] **Implemented with Pytorch**
+- [] **Provide a trained model**
+- [] **Optimize code style**
+- [] **......**
 
 ------------
+
 
 
 Part of the code reference this github [https://github.com/bill9800/speech_separation](https://github.com/bill9800/speech_separation "https://github.com/bill9800/speech_separation")
