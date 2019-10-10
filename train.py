@@ -70,8 +70,8 @@ if resume_state:
 else:
     AV_model = AV.AV_model(people_num)
 
-train_generator = AVGenerator(trainfile, database_dir_path=database_path, batch_size=batch_size, shuffle=True)
-val_generator = AVGenerator(valfile, database_dir_path=database_path, batch_size=batch_size, shuffle=True)
+train_generator = AVGenerator(trainfile, database_path=database_path, batch_size=batch_size, shuffle=True)
+val_generator = AVGenerator(valfile, database_path=database_path, batch_size=batch_size, shuffle=True)
 
 if NUM_GPU > 1:
     parallel_model = ModelMGPU(AV_model, NUM_GPU)
