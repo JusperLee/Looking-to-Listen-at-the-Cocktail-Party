@@ -1,18 +1,10 @@
-from keras import optimizers
-#from keras.layers import Dense, Convolution3D, MaxPooling3D, ZeroPadding3D, Dropout, Flatten, BatchNormalization, ReLU
-from keras.models import Sequential, model_from_json
-from keras import optimizers
-from keras.layers import Input, Dense, Convolution2D, Deconvolution2D, Bidirectional, UpSampling2D, UpSampling3D, concatenate
-from keras.layers import Dropout, Flatten, BatchNormalization, ReLU, Reshape, Permute, Lambda, TimeDistributed
-from keras.models import Model, load_model
+from keras.models import Sequential
+from keras.layers import Input, Dense, Convolution2D,Bidirectional, concatenate
+from keras.layers import Flatten, BatchNormalization, ReLU, Reshape, Lambda, TimeDistributed
+from keras.models import Model
 from keras.layers.recurrent import LSTM
 from keras.initializers import he_normal, glorot_uniform
-import numpy as np
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler
-from keras.callbacks import TensorBoard
 import tensorflow as tf
-import os
-from data_load import AVGenerator
 
 
 def AV_model(people_num=2):
@@ -162,91 +154,3 @@ def AV_model(people_num=2):
     # AV_model.compile(optimizer='adam', loss='mse')
 
     return AV_model
-
-
-if __name__ == '__main__':
-    #############################################################
-    RESTORE = False
-    # If set true, continue training from last checkpoint
-    # needed change 1:h5 file name, 2:epochs num, 3:initial_epoch
-
-    # super parameters
-    people_num = 2
-    epochs = 50
-    initial_epoch = 0
-    batch_size = 2
-    #############################################################
-
-    # audio_input = np.random.rand(5, 298, 257, 2)        # 5 audio parts, (298, 257, 2) stft feature
-    # audio_label = np.random.rand(5, 298, 257, 2, people_num)     # 5 audio parts, (298, 257, 2) stft feature, people num to be defined
-
-    # ///////////////////////////////////////////////////////// #
-    # create folder to save models
-    path = './saved_models_AV'
-    folder = os.path.exists(path)
-    if not folder:
-        os.makedirs(path)
-        print('create folder to save models')
-    filepath = path + "/AVmodel-" + str(people_num) + "p-{epoch:03d}-{val_loss:.10f}.h5"
-    checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-
-
-    # checkpoint2 = ModelCheckpoint(path + "/AOmodel-latest-" + str(people_num) + ".h5", monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-    # ///////////////////////////////////////////////////////// #
-
-    #############################################################
-    # automatically change lr
-    def scheduler(epoch):
-        ini_lr = 0.001
-        lr = ini_lr
-        if epoch >= 5:
-            lr = ini_lr / 5
-        if epoch >= 10:
-            lr = ini_lr / 10
-        return lr
-
-
-    rlr = LearningRateScheduler(scheduler, verbose=1)
-    #############################################################
-
-    # ///////////////////////////////////////////////////////// #
-    # read train and val file name
-    # format: mix.npy single.npy single.npy
-    trainfile = []
-    valfile = []
-    with open('./trainfile.txt', 'r') as t:
-        trainfile = t.readlines()
-    with open('./valfile.txt', 'r') as v:
-        valfile = v.readlines()
-
-
-    # ///////////////////////////////////////////////////////// #
-
-    # the training steps
-    def latest_file(dir):
-        lists = os.listdir(dir)
-        lists.sort(key=lambda fn: os.path.getmtime(dir + fn))
-        file_latest = os.path.join(dir, lists[-1])
-        return file_latest
-
-
-    if RESTORE:
-        last_file = latest_file('./saved_models_AO/')
-        AV_model = load_model(last_file)
-        info = last_file.strip().split('-')
-        initial_epoch = int(info[-2])
-        # print(initial_epoch)
-    else:
-        AV_model = AV_model(people_num)
-        adam = optimizers.Adam()
-        AV_model.compile(optimizer=adam, loss='mse')
-
-    train_generator = AVGenerator(trainfile, database_dir_path='./', batch_size=batch_size, shuffle=True)
-    val_generator = AVGenerator(valfile, database_dir_path='./', batch_size=batch_size, shuffle=True)
-
-    AV_model.fit_generator(generator=train_generator,
-                           validation_data=val_generator,
-                           epochs=epochs,
-                           callbacks=[TensorBoard(log_dir='./log_AV'), checkpoint, rlr],
-                           initial_epoch=initial_epoch
-                           )
