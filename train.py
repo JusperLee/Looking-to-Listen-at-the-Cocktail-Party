@@ -11,7 +11,7 @@ from keras import optimizers
 import os
 from loss import audio_discriminate_loss2 as audio_loss
 import tensorflow as tf
-
+import matplotlib.pyplot as plt
 # Resume Model
 resume_state = False
 
@@ -25,7 +25,7 @@ beta_loss = gamma_loss * 2
 
 # Accelerate Training Process
 workers = 8
-MultiProcess = False
+MultiProcess = True
 NUM_GPU = 0
 
 # PATH
@@ -79,7 +79,7 @@ if NUM_GPU > 1:
     loss = audio_loss(gamma=gamma_loss, beta=beta_loss, people_num=people_num)
     parallel_model.compile(loss=loss, optimizer=adam)
     print(AV_model.summary())
-    parallel_model.fit_generator(generator=train_generator,
+    history=parallel_model.fit_generator(generator=train_generator,
                                  validation_data=val_generator,
                                  epochs=epochs,
                                  workers=workers,
@@ -87,12 +87,24 @@ if NUM_GPU > 1:
                                  callbacks=[TensorBoard(log_dir='./log_AV'), checkpoint, rlr],
                                  initial_epoch=initial_epoch
                                  )
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
+    # summarize history for loss plt.plot(history.history['loss']) plt.plot(history.history['val_loss']) plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
 if NUM_GPU <= 1:
     adam = optimizers.Adam()
     loss = audio_loss(gamma=gamma_loss, beta=beta_loss, people_num=people_num)
     AV_model.compile(optimizer=adam, loss=loss)
     print(AV_model.summary())
-    AV_model.fit_generator(generator=train_generator,
+    history=AV_model.fit_generator(generator=train_generator,
                            validation_data=val_generator,
                            epochs=epochs,
                            workers=workers,
@@ -100,3 +112,15 @@ if NUM_GPU <= 1:
                            callbacks=[TensorBoard(log_dir='./log_AV'), checkpoint, rlr],
                            initial_epoch=initial_epoch
                            )
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
+    # summarize history for loss plt.plot(history.history['loss']) plt.plot(history.history['val_loss']) plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
