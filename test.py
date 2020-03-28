@@ -1,7 +1,8 @@
 import sys
-sys.path.append('./model/model')
+sys.path.append ('./ model / model')
+sys.path.append ('./ model / utils')
 from keras.models import load_model
-from model_ops import ModelMGPU
+from option import ModelMGPU
 import os
 import scipy.io.wavfile as wavfile
 import numpy as np
