@@ -13,12 +13,22 @@
 - Keras 2.3.1
 - librosa 0.7.0
 - youtube-dl([https://github.com/ytdl-org/youtube-dl](https://github.com/ytdl-org/youtube-dl "https://github.com/ytdl-org/youtube-dl"))(**Any version**)
-- ffmpeg([https://www.ffmpeg.org/](https://www.ffmpeg.org/ "https://www.ffmpeg.org/"))（**Any version**）
+- ffmpeg([https://www.ffmpeg.org/](https://www.ffmpeg.org/ "https://www.ffmpeg.org/"))（**Any version**)
 
+To install requirements:
+```shell
+pip install -r requirements.txt
+```
+
+Install ffmpeg using brew:
+```shell
+brew install ffmpeg
+```
 ------------
 
 ### Pretreatment
 #### Video Data
+0. Download the dataset from [here](https://looking-to-listen.github.io/avspeech/download.html) and place files in data/csv.
 1. First use this command to download the YouTube video and use ffmpeg to capture the 3 second video as 75 images.
 ```shell
 python3 video_download.py
@@ -43,7 +53,7 @@ python3 audio_data.py
 ```
 
 #### Face embedding Feature
-- Here we use Google's FaceNet method to map face images to high-dimensional Euclidean space. In this project, we use David Sandberg's open source FaceNet preprocessing model "20180402-114759". Then use the TensorFlow_to_Keras script in this project to convert.（**Model/face_embedding/**）
+- Here we use Google's FaceNet method to map face images to high-dimensional Euclidean space. In this project, we use David Sandberg's open source FaceNet preprocessing model "[20180402-114759](https://drive.google.com/file/d/1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-/view)". Then use the TensorFlow_to_Keras script in this project to convert.（**Model/face_embedding/**）
 > Schroff F, Kalenichenko D, Philbin J. Facenet: A unified embedding for face recognition and clustering[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 815-823.
 
 ```shell
@@ -52,6 +62,12 @@ python3 face_emb.py
 ```
 
 ------------
+
+3. Create AVdataset_train.txt and AVdataset_val.txt
+
+```shell
+python3 AV_data_log.py
+```
 
 
 ### Training
