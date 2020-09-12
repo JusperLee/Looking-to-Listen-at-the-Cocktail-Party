@@ -14,15 +14,17 @@
 - librosa 0.7.0
 - youtube-dl([https://github.com/ytdl-org/youtube-dl](https://github.com/ytdl-org/youtube-dl "https://github.com/ytdl-org/youtube-dl"))(**Any version**)
 - ffmpeg([https://www.ffmpeg.org/](https://www.ffmpeg.org/ "https://www.ffmpeg.org/"))（**Any version**)
+- sox
 
 To install requirements:
 ```shell
 pip install -r requirements.txt
 ```
 
-Install ffmpeg using brew:
+Install ffmpeg and sox using brew:
 ```shell
 brew install ffmpeg
+brew install sox
 ```
 ------------
 
