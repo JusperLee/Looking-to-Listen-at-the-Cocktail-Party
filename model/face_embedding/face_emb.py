@@ -1,7 +1,6 @@
 import tensorflow as tf
 import sys
 sys.path.append('../lib/')
-import utils
 from tensorflow.python.framework import tensor_util
 import numpy as np
 from keras.models import load_model
@@ -12,7 +11,7 @@ import os
 
 ## paraeter
 HDF5 = 1
-MODEL_PATH = 'facenet_keras.h5'
+MODEL_PATH = '../model/keras/facenet_keras.h5'
 VALID_FRAME_LOG_PATH = '../../data/video_data/valid_face_text.txt'
 FACE_INPUT_PATH = '../../data/video_data/face_input/'
 

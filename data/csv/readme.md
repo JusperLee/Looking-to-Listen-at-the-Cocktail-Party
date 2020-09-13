@@ -1,7 +1,7 @@
 ### AVSpeech Datasets Downloads address
-#### 链接:[https://pan.baidu.com/s/1jMjjbourzKGm7pJ4_bDBrQ](https://pan.baidu.com/s/1jMjjbourzKGm7pJ4_bDBrQ ) 
+#### 链接:[https://pan.baidu.com/s/1jMjjbourzKGm7pJ4_bDBrQ](https://pan.baidu.com/s/1jMjjbourzKGm7pJ4_bDBrQ )
 #### 密码:pr9r
-
+#### Alternative Link:[https://looking-to-listen.github.io/avspeech/download.html](https://looking-to-listen.github.io/avspeech/download.html )
 
 ------------
 
