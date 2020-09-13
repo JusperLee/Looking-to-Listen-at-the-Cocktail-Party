@@ -21,7 +21,7 @@ To install requirements:
 pip install -r requirements.txt
 ```
 
-Install ffmpeg and sox using brew:
+You can install ffmpeg and sox using homebrew:
 ```shell
 brew install ffmpeg
 brew install sox
@@ -57,6 +57,9 @@ python3 audio_data.py
 #### Face embedding Feature
 - Here we use Google's FaceNet method to map face images to high-dimensional Euclidean space. In this project, we use David Sandberg's open source FaceNet preprocessing model "[20180402-114759](https://drive.google.com/file/d/1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-/view)". Then use the TensorFlow_to_Keras script in this project to convert.（**Model/face_embedding/**）
 > Schroff F, Kalenichenko D, Philbin J. Facenet: A unified embedding for face recognition and clustering[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 815-823.
+
+
+Change the path `tf_model_dir` in Tensorflow_to_Keras.py
 
 ```shell
 python3 Tensorflow_to_Keras.py
